@@ -2,8 +2,8 @@ POST http://localhost:8080/create_event
 Content-Type: application/json
 
 {
-    "name": "shamim",
-    "email": "shamim@gmail.com",
+    "name": "md_shamim",
+    "email": "shamim2@gmail.com",
     "location": "japan,tokyo",
     "date": "2025-01-01T15:30:00.000Z"
 }
