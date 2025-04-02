@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"strconv"
 
 	"cloudterms.net/project/db"
 	"cloudterms.net/project/models"
@@ -12,9 +13,27 @@ func main() {
 	db.InitDB()
 	server := gin.Default()
 	server.GET("/events", getEvents)
+	server.GET("/events/:id", getEvent)
 	server.POST("/create_event", createEvent)
 
 	server.Run(":8080")
+}
+
+func getEvent(context *gin.Context) {
+	eventId, err := strconv.ParseInt(context.Param("id"), 10, 64)
+	if err != nil {
+		context.JSON(http.StatusBadGateway, gin.H{"message": "Could not parse event id"})
+		return
+	}
+
+	event, err := models.GetEventByID(eventId)
+
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"message": "unable to fetch event data"})
+		return
+	}
+
+	context.JSON(http.StatusOK, event)
 }
 
 func getEvents(context *gin.Context) {
