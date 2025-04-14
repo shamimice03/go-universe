@@ -8,29 +8,28 @@ import (
 )
 
 type Event struct {
-	ID       int64
-	Name     string    `binding:"required"`
-	Email    string    `binding:"required,email"`
-	Location string    `binding:"required"`
-	Date     time.Time `binding:"required"`
-	UserID   int64
+	ID          int64
+	Name        string    `binding:"required"`
+	Description string    `binding:"required"`
+	Location    string    `binding:"required"`
+	Date        time.Time `binding:"required"`
+	UserID      int64
 }
 
 var events = []Event{}
 
 func (e Event) Save() error {
-	query := `INSERT INTO events(name, email, location, date, user_id) 
+	query := `INSERT INTO events(name, description, location, date, user_id) 
 	VALUES (?,?,?,?,?)
 	`
 	stmt, err := db.DB.Prepare(query)
 
 	if err != nil {
-		log.Fatal(err)
 		return err
 	}
 
 	defer stmt.Close()
-	result, err := stmt.Exec(e.Name, e.Email, e.Location, e.Date, e.UserID)
+	result, err := stmt.Exec(e.Name, e.Description, e.Location, e.Date, e.UserID)
 	if err != nil {
 		log.Fatal(err)
 		return err
@@ -46,6 +45,38 @@ func (e Event) Save() error {
 	return err
 }
 
+func (e Event) Update() error {
+	query := `
+	UPDATE events
+	SET name = ?, description = ?, location = ?, date = ?
+	WHERE id = ?
+	`
+	stmt, err := db.DB.Prepare(query)
+	if err != nil {
+		return err
+	}
+
+	defer stmt.Close()
+
+	stmt.Exec(e.Name, e.Description, e.Location, e.Date, e.ID)
+
+	return err
+}
+
+func (e Event) Delete() error {
+	query := "DELETE FROM events WHERE id = ?"
+	stmt, err := db.DB.Prepare(query)
+
+	if err != nil {
+		return err
+	}
+
+	defer stmt.Close()
+
+	_, err = stmt.Exec(e.ID)
+	return err
+}
+
 func GetAllEvents() ([]Event, error) {
 	query := "SELECT * FROM events"
 	rows, err := db.DB.Query(query)
@@ -56,10 +87,11 @@ func GetAllEvents() ([]Event, error) {
 	}
 
 	defer rows.Close()
+	events = []Event{}
 
 	for rows.Next() {
 		var event Event
-		err := rows.Scan(&event.ID, &event.Name, &event.Email, &event.Location, &event.Date, &event.UserID)
+		err := rows.Scan(&event.ID, &event.Name, &event.Description, &event.Location, &event.Date, &event.UserID)
 
 		if err != nil {
 			log.Fatal(err)
@@ -82,7 +114,7 @@ func GetEventByID(id int64) (*Event, error) {
 	row := db.DB.QueryRow(query, id)
 
 	var event Event
-	if err := row.Scan(&event.ID, &event.Name, &event.Email, &event.Location, &event.Date, &event.UserID); err != nil {
+	if err := row.Scan(&event.ID, &event.Name, &event.Description, &event.Location, &event.Date, &event.UserID); err != nil {
 		return nil, err
 	}
 
