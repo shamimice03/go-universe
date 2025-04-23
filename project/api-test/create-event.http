@@ -1,5 +1,6 @@
 POST http://localhost:8080/create_event
 Content-Type: application/json
+Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNoYW1pbTJAZ21haWwuY29tIiwiZXhwIjoxNzQ1NDMwMzAyLCJ1c2VySWQiOjB9.hK1-94oPSJcK_2CTLre6ZFqNf9T44nwbwXwJPKuvvzA"
 
 {
     "name": "md_shamim",

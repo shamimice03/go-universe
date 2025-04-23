@@ -37,6 +37,15 @@ func getEvents(context *gin.Context) {
 }
 
 func createEvent(context *gin.Context) {
+	// get jwt token
+	token := context.Request.Header.Get("Authorization")
+
+	if token == "" {
+		context.JSON(http.StatusUnauthorized, gin.H{"message": "Not authorized"})
+		return
+	}
+
+	// get event data from request
 	var event models.Event
 	err := context.ShouldBindJSON(&event)
 
