@@ -1,9 +1,10 @@
-PUT http://localhost:8080/update_event/1
+PUT http://localhost:8080/update_event/28
 Content-Type: application/json
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNoYW1pbTVAZ21haWwuY29tIiwiZXhwIjoxNzQ2MTgzMzA3LCJ1c2VySWQiOjd9.effLg-DbU7pDih09v_C1Wghm0sIkim6TOR6YoIXuldQ
 
 {
-    "name": "test",
-    "email": "shamim2@gmail.com",
+    "name": "target",
+    "description": "To read quran",
     "location": "japan,tokyo",
     "date": "2025-01-01T15:30:00.000Z"
 }

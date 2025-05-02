@@ -1,9 +1,9 @@
 POST http://localhost:8080/create_event
 Content-Type: application/json
-Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNoYW1pbTJAZ21haWwuY29tIiwiZXhwIjoxNzQ1NDMwMzAyLCJ1c2VySWQiOjB9.hK1-94oPSJcK_2CTLre6ZFqNf9T44nwbwXwJPKuvvzA"
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNoYW1pbTVAZ21haWwuY29tIiwiZXhwIjoxNzQ2MTg0Nzc2LCJ1c2VySWQiOjd9.vmOW5pC5H0dabsHFxYpZclSabbn_mdYeqr1xc2XE-JY
 
 {
-    "name": "md_shamim",
+    "name": "quran",
     "description": "To read quran",
     "location": "japan,tokyo",
     "date": "2025-01-01T15:30:00.000Z"
