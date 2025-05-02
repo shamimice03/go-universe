@@ -1,10 +1,10 @@
 POST http://localhost:8080/create_event
 Content-Type: application/json
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNoYW1pbTVAZ21haWwuY29tIiwiZXhwIjoxNzQ2MTg0Nzc2LCJ1c2VySWQiOjd9.vmOW5pC5H0dabsHFxYpZclSabbn_mdYeqr1xc2XE-JY
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNoYW1pbTFAZ21haWwuY29tIiwiZXhwIjoxNzQ2MTk2NTk5LCJ1c2VySWQiOjF9.AAYda3vCUd08quVX_aWidOpXZPkGLtl_0T98IRefP6g
 
 {
-    "name": "quran",
-    "description": "To read quran",
+    "name": "Quran quiz",
+    "description": "To learn quran",
     "location": "japan,tokyo",
     "date": "2025-01-01T15:30:00.000Z"
 }
